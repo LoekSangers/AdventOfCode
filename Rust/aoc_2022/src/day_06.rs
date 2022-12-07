@@ -61,7 +61,7 @@ fn part_1(input: &[char]) -> usize {
     0
 }
 #[allow(dead_code)]
-fn part_2(input: &[char]) -> usize {
+fn part_2_slow(input: &[char]) -> usize {
     let windows = input.windows(14).enumerate();
     for (index, elems) in windows {
         let set: HashSet<char> = elems.iter().copied().collect();
@@ -72,10 +72,34 @@ fn part_2(input: &[char]) -> usize {
     0
 }
 
-fn part_2_perf(input: &[char]) -> usize {
+#[allow(dead_code)]
+fn part_2(input: &[char]) -> usize {
     let windows = input.windows(14).enumerate();
     for (index, elems) in windows {
         if !((1..elems.len()).any(|i| elems[i..].contains(&elems[i - 1]))) {
+            return index + 14;
+        }
+    }
+    0
+}
+
+fn part_2_perf(input: &[char]) -> usize {
+    let windows = input.windows(14).enumerate();
+    for (index, elems) in windows {
+        if !(elems[1..].contains(&elems[0])
+            || elems[2..].contains(&elems[1])
+            || elems[3..].contains(&elems[2])
+            || elems[4..].contains(&elems[3])
+            || elems[5..].contains(&elems[4])
+            || elems[6..].contains(&elems[5])
+            || elems[7..].contains(&elems[6])
+            || elems[8..].contains(&elems[7])
+            || elems[9..].contains(&elems[8])
+            || elems[10..].contains(&elems[9])
+            || elems[11..].contains(&elems[10])
+            || elems[12..].contains(&elems[11])
+            || elems[13] == elems[12])
+        {
             return index + 14;
         }
     }
