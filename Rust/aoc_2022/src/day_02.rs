@@ -38,6 +38,7 @@ pub fn run() {
     );
 }
 
+#[allow(clippy::identity_op)]
 fn part_1(input: &[String]) -> usize {
     input.iter().fold(0_usize, |acc, elem| {
         acc + match elem.as_str() {
@@ -55,6 +56,7 @@ fn part_1(input: &[String]) -> usize {
     })
 }
 
+#[allow(clippy::identity_op)]
 fn part_2(input: &[String]) -> usize {
     input.iter().fold(0_usize, |acc, elem| {
         acc + match elem.as_str() {
